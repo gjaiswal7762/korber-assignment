@@ -8,5 +8,6 @@ import java.util.List;
 @Repository
 public interface InventoryBatchRepository extends JpaRepository<InventoryBatch, Long> {
     List<InventoryBatch> findByProductIdOrderByExpiryDateAsc(Long productId);
+    List<InventoryBatch> findByProductIdOrderByExpiryDateDesc(Long productId);
     InventoryBatch findByBatchId(Long batchId);
 }

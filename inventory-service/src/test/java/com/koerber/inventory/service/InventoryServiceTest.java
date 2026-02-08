@@ -4,7 +4,8 @@ import com.koerber.inventory.dto.BatchDTO;
 import com.koerber.inventory.dto.InventoryResponseDTO;
 import com.koerber.inventory.dto.InventoryUpdateDTO;
 import com.koerber.inventory.entity.InventoryBatch;
-import com.koerber.inventory.handler.InventoryHandlerFactory;
+import com.koerber.inventory.handler.InventoryHandler;
+import com.koerber.inventory.handler.InventoryHandlerFactoryProvider;
 import com.koerber.inventory.handler.StandardInventoryHandler;
 import com.koerber.inventory.repository.InventoryBatchRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,17 +29,17 @@ class InventoryServiceTest {
     private InventoryBatchRepository inventoryBatchRepository;
 
     @Mock
-    private InventoryHandlerFactory handlerFactory;
+    private InventoryHandlerFactoryProvider handlerFactoryProvider;
 
     @InjectMocks
     private InventoryService inventoryService;
 
-    private StandardInventoryHandler standardInventoryHandler;
+    private InventoryHandler standardInventoryHandler;
 
     @BeforeEach
     void setUp() {
         standardInventoryHandler = new StandardInventoryHandler(inventoryBatchRepository);
-        when(handlerFactory.getDefaultHandler()).thenReturn(standardInventoryHandler);
+        when(handlerFactoryProvider.getDefaultHandler()).thenReturn(standardInventoryHandler);
     }
 
     @Test
